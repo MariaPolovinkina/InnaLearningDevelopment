@@ -15,6 +15,8 @@ public class SimpleOperations {
 		myArrayList.add("Value1");
 		myArrayList.add("Value2");
 		myArrayList.add("Value3");
+		/////
+		/////test comments
 
 		System.out.print(myArrayList.get(1) + " ");
 		System.out.println();
