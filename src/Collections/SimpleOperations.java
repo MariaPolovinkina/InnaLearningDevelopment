@@ -38,7 +38,6 @@ public class SimpleOperations {
 			System.out.print(iter.next() + " ");
 		}
 
-		// TODO: Add remove operations and check the results
 		myArrayList.remove(2);
 		System.out.println();
 
@@ -49,35 +48,68 @@ public class SimpleOperations {
 		System.out.println();
 		myArrayList.remove("Value4");
 
-		// Example with iterator.
-		///
-		///
-		// ? I wasn't able to use iter. why?
-		Iterator<String> iter1 = myArrayList.iterator();
-		while (iter1.hasNext()) {
-			System.out.print(iter1.next() + " ");
+		//This is the way to re-use the iterator
+		iter = myArrayList.iterator();
+		
+		while (iter.hasNext()) {
+			System.out.print(iter.next() + " ");
 		}
+		
+		//Short task. Why does it work (with this results)?
+		
+		ArrayList<String> sampleList = new ArrayList<>();
+	    String value1 = "value1";
+	    String value2 = "value2";
+	    
+	    sampleList.add(value1);
+	    sampleList.add(value2);
+	    
+	    System.out.print("\n" + sampleList.size() + ":");
+	    
+	    value1 = "value3";
+	    sampleList.remove(value1);
+	    System.out.println(sampleList.size());
+		
 
 	}
 
 	public void calculateForSets() {
+		
 		Set<String> mySet = new HashSet<String>();
+		
 		mySet.add("Mama");
 		mySet.add("Papa");
 		mySet.add("Daughter");
-		mySet.add("Sun");
+		mySet.add("Son");
+		mySet.add("Mama"); //Try to add extra "Mama"
 
 		System.out.println(mySet);
+		
+		System.out.println("\nOne more way to print the set");
+		
+		for (String s: mySet) {
+			System.out.print(s + " ");
+	    }
 
 		mySet.add("Aunt");
 		mySet.add("Dog");
 		mySet.add("Cat");
+		
 		Iterator<String> iter = mySet.iterator();
+		
+		System.out.println("\n\nPrint with using iterator");
 		while (iter.hasNext()) {
 			System.out.print(iter.next() + " ");
 		}
 		
 		//new elements were added anywhere. How can I get and print only one element? For ex. "Mama"???
+		System.out.println("\n");
+		
+		if(mySet.contains("Mama")) {
+			//Do something
+			System.out.println("Mama");
+		}
+		
 		//remove
 		mySet.remove("Cat");
 		System.out.println();
@@ -92,7 +124,6 @@ public class SimpleOperations {
 		// added print new line
 		System.out.println();
 
-		// TODO: Add method for Set
 		calculateForSets();
 
 	}
