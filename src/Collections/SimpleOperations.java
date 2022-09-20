@@ -15,9 +15,7 @@ public class SimpleOperations {
 		myArrayList.add("Value1");
 		myArrayList.add("Value2");
 		myArrayList.add("Value3");
-		/////
-		/////test comments
-
+		
 		System.out.print(myArrayList.get(1) + " ");
 		System.out.println();
 
@@ -80,6 +78,10 @@ public class SimpleOperations {
 		}
 		
 		//new elements were added anywhere. How can I get and print only one element? For ex. "Mama"???
+		//remove
+		mySet.remove("Cat");
+		System.out.println();
+		System.out.println(mySet);
 		
 
 	}
