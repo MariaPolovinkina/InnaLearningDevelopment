@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public class SimpleOperations {
-
+	
 	public void calculateForLists() {
 
 		List<String> myArrayList = new ArrayList<String>();
@@ -63,10 +63,9 @@ public class SimpleOperations {
 	    
 	    sampleList.add(value1);
 	    sampleList.add(value2);
-	    
 	    System.out.print("\n" + sampleList.size() + ":");
 	    
-	    value1 = "value3";
+	    value1 = "value3"; 
 	    sampleList.remove(value1);
 	    System.out.println(sampleList.size());
 		
@@ -117,6 +116,11 @@ public class SimpleOperations {
 		
 
 	}
+	
+	public HashSet<String> convertToSet(ArrayList<String> arrList){
+		HashSet<String> convertedSet = new HashSet(arrList);
+		return convertedSet;
+	}
 
 	public void calculate() {
 
@@ -124,7 +128,7 @@ public class SimpleOperations {
 		// added print new line
 		System.out.println();
 
-		calculateForSets();
+		//calculateForSets();
 
 	}
 
