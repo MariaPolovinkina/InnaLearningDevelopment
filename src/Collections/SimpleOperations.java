@@ -118,8 +118,28 @@ public class SimpleOperations {
 	}
 	
 	public HashSet<String> convertToSet(ArrayList<String> arrList){
-		HashSet<String> convertedSet = new HashSet(arrList);
+		
+		HashSet<String> convertedSet = new HashSet<String>(arrList);
 		return convertedSet;
+	}
+	
+	public void excludeDuplicatesFromList() {
+		
+		//Both ways are good!
+		//ArrayList<String> sampleList = new ArrayList<>();
+		ArrayList<String> sampleList = new ArrayList<String>();
+		
+		sampleList.add("Apple");
+		sampleList.add("Pear");
+		sampleList.add("Beans");
+		sampleList.add("Apple");
+		sampleList.add("Banana");
+		
+		System.out.println(sampleList);
+		
+		HashSet<String> convertedSet = convertToSet(sampleList);
+		
+		System.out.println(convertedSet);
 	}
 
 	public void calculate() {
@@ -129,6 +149,8 @@ public class SimpleOperations {
 		System.out.println();
 
 		//calculateForSets();
+		
+		excludeDuplicatesFromList();
 
 	}
 
