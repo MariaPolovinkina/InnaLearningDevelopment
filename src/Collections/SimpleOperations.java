@@ -123,6 +123,23 @@ public class SimpleOperations {
 		return convertedSet;
 	}
 	
+	public void addDuplicatesToSets() {
+		
+		HashSet<UnequalWrapper> addDuplSet = new HashSet<UnequalWrapper>();
+
+		addDuplSet.add(new UnequalWrapper("Banan"));
+		addDuplSet.add(new UnequalWrapper("Apple"));
+		addDuplSet.add(new UnequalWrapper("Banan"));
+		addDuplSet.add(new UnequalWrapper("Apple"));
+
+		Iterator<UnequalWrapper> iter = addDuplSet.iterator();
+
+		while (iter.hasNext()) {
+			System.out.print(iter.next().get() + " ");
+		}
+
+	}
+	
 	public void excludeDuplicatesFromList() {
 		
 		//Both ways are good!
@@ -151,6 +168,8 @@ public class SimpleOperations {
 		//calculateForSets();
 		
 		excludeDuplicatesFromList();
+		
+		addDuplicatesToSets();
 
 	}
 
