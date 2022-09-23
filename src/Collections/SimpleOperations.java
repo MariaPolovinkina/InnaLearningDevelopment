@@ -1,10 +1,13 @@
 package Collections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class SimpleOperations {
 	
@@ -140,6 +143,33 @@ public class SimpleOperations {
 
 	}
 	
+	public void sortedMySet() {
+		//use sorted set
+		SortedSet<String> mySortedSet= new TreeSet<>();		
+		mySortedSet.add("Banana");
+		mySortedSet.add("Apple");
+		mySortedSet.add("Dom");
+		mySortedSet.add("Cat");
+		System.out.println();
+		System.out.println(mySortedSet);
+		
+		//sorted hashset
+		HashSet<String> myHashset = new HashSet<>();
+		myHashset.add("b4");
+		myHashset.add("b2");
+		myHashset.add("b1");
+		myHashset.add("b3");
+		System.out.println("Before sorting: ");
+		System.out.println(myHashset);		
+		ArrayList<String> mylist = new ArrayList<>(myHashset);
+		Collections.sort(mylist);
+		System.out.println("After sorting: ");
+		System.out.println(mylist);		
+		Collections.sort(mylist, Collections.reverseOrder());
+		System.out.println("After reverse sorting: ");
+		System.out.println(mylist);
+	}
+	
 	public void excludeDuplicatesFromList() {
 		
 		//Both ways are good!
@@ -170,6 +200,8 @@ public class SimpleOperations {
 		excludeDuplicatesFromList();
 		
 		addDuplicatesToSets();
+		
+		sortedMySet();
 
 	}
 
