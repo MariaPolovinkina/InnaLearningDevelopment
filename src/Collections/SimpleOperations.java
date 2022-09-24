@@ -2,6 +2,7 @@ package Collections;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -162,12 +163,34 @@ public class SimpleOperations {
 		System.out.println("Before sorting: ");
 		System.out.println(myHashset);		
 		ArrayList<String> mylist = new ArrayList<>(myHashset);
-		Collections.sort(mylist);
-		System.out.println("After sorting: ");
+		//Collections.sort(mylist);
+		/*System.out.println("After sorting: ");
 		System.out.println(mylist);		
 		Collections.sort(mylist, Collections.reverseOrder());
 		System.out.println("After reverse sorting: ");
-		System.out.println(mylist);
+		System.out.println(mylist);*/
+		
+		ArrayList<String> list = new ArrayList<>();
+		list.add("a121");
+		list.add("d331");
+		list.add("b411");
+		list.add("c241");
+		System.out.println(list);
+		
+		/*Collections.sort(list, new Comparator<String>() {
+			public int compare(String a, String b) {
+				return a.toString().compareTo(b.toString());
+			}
+		});*/
+		
+		Collections.sort(list, new Comparator<String>() {
+		public int compare(String a, String b) {
+			return a.substring(1).toString().compareTo(b.substring(1).toString());
+		}
+	});		
+		
+		System.out.println(list);	
+		
 	}
 	
 	public void excludeDuplicatesFromList() {
