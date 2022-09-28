@@ -1,3 +1,4 @@
+import Collections.CollectionsCasting;
 import Collections.SimpleOperations;
 
 public class Main {
@@ -11,8 +12,11 @@ public class Main {
 		//MyObject myObject = new myObject();
 		//myObject.calculate();
 		
-		SimpleOperations myObject = new SimpleOperations();
-		myObject.calculate();
+		//SimpleOperations myObject = new SimpleOperations();
+		//myObject.calculate();
+		
+		CollectionsCasting myCasting = new CollectionsCasting();
+		myCasting.calculate();
 	}
 
 }
