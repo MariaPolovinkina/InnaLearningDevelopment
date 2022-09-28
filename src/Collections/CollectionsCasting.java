@@ -59,30 +59,49 @@ public class CollectionsCasting {
 		return myMap;
 	
 	}
+	
+	public void inverseMap (Map<Integer, Integer> sourceMap) {
+		
+		//TODO: define the return value type and add it instead of void!
+		
+	}
+	
+	public List<Integer> generateRandomList(int minBound, int maxBound, int iterationsCount) {
+		
+		// Generate 100 random integer values between [1...10]
+		List<Integer> generatedList = new ArrayList<>();
+
+		//TODO: I'd prefer to use the for () cycle to exclude the instantiations of cycle
+		// variables (out of cycle)
+
+		// int len = 0;
+		// while (len < 100) {
+		
+		// TODO: It would be better to move the "int random_int" declaration put of cycle.
+		
+		int random_int = 0;
+		
+		for (int i = 0; i < iterationsCount; i++) {
+
+			random_int = (int) Math.floor(Math.random() * (maxBound - minBound + 1) + minBound);
+
+			generatedList.add(random_int);
+			// len++;
+		}
+		System.out.println("Size: " + generatedList.size());
+		
+		return generatedList;
+	}
 
 	public void calculate() {
 
-		// Generate 100 random integer values between [1...10]
-		List<Integer> sourceList = new ArrayList<>();
-		int max = 10;
-		int min = 1;
-		int iterationsCount = 100;
-		
-		// I'd prefer to use the for () cycle to exclude the instantiations of cycle variables (out of cycle) 
-		
-		//int len = 0;
-		//while (len < 100) {
-		for (int i = 0; i < iterationsCount; i++) {
-			
-			int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
-			
-			sourceList.add(random_int);
-			//len++;
-		}
-		System.out.println("Size: " + sourceList.size());
+		List<Integer> generatedList = generateRandomList(1, 10, 100);
 
 		// Call the formatListToMap(...) method
-		formatListToMap(sourceList);
-		formatListToMapVersion2(sourceList);
+		Map<Integer, Integer> formatedMap = formatListToMap(generatedList);
+		
+		inverseMap(formatedMap);
+		
+		//formatListToMapVersion2(generatedList);
 	}
 }
