@@ -11,76 +11,96 @@ import java.util.function.BiFunction;
 public class CollectionsCasting {
 
 	public Map<Integer, Integer> formatListToMap(List<Integer> sourceList) {
-		
+
 		Map<Integer, Integer> myMap = new HashMap<>();
-		
+
 		for (int i = 0; i < sourceList.size(); i++) {
-			
+
 			if (myMap.containsKey(sourceList.get(i))) {
-				
+
 				myMap.put(sourceList.get(i), myMap.get(sourceList.get(i)) + 1);
-				
+
 			} else {
-				
+
 				myMap.put(sourceList.get(i), 1);
 			}
 		}
-		
-		//print for checking #1
+
+		// print for checking #1
 		System.out.println(Arrays.asList(myMap));
-		//print for checking #2
+		// print for checking #2
 		System.out.println(Collections.singletonList(myMap));
-		
+
 		// Add your own return
 		return myMap;
 	}
-	
+
 	/**
 	 * Just for demonstration!
+	 * 
 	 * @param sourceList
 	 * @return
+	 * cool!!!!!!
 	 */
 	public Map<Integer, Integer> formatListToMapVersion2(List<Integer> sourceList) {
-		
+
 		Map<Integer, Integer> myMap = new HashMap<>();
-		
+
 		for (Integer iter : sourceList) {
-			
+
 			myMap.compute(iter, new BiFunction<Integer, Integer, Integer>() {
-                @Override
-                public Integer apply(Integer iter, Integer count) {
-                    return count == null ? 1 : count + 1;
-                }
-            });
+				@Override
+				public Integer apply(Integer iter, Integer count) {
+					return count == null ? 1 : count + 1;
+				}
+			});
 		}
-		
+
 		System.out.println("Version2 results =====>");
 		System.out.println(Arrays.asList(myMap));
 		return myMap;
-	
+
 	}
-	
-	public void inverseMap (Map<Integer, Integer> sourceMap) {
+
+	public void inverseMap(Map<Integer, Integer> sourceMap) {
+
+		// TODO: define the return value type and add it instead of void!
 		
-		//TODO: define the return value type and add it instead of void!
+		Map<Integer, Integer> myMap = new HashMap<>();
+
+		for (Map.Entry<Integer, Integer> entry : sourceMap.entrySet()) {
+			
+			myMap.put(entry.getValue(), entry.getKey());
+			
+		}
+		/* there are two options
+		* 1) i can return myMap or
+		* 2) can re-write myMap and do not return anything
+		* what will be the better way? 
+		*/
+		sourceMap.clear();
 		
+		sourceMap.putAll(myMap);
+
 	}
-	
+
 	public List<Integer> generateRandomList(int minBound, int maxBound, int iterationsCount) {
-		
+
 		// Generate 100 random integer values between [1...10]
 		List<Integer> generatedList = new ArrayList<>();
 
-		//TODO: I'd prefer to use the for () cycle to exclude the instantiations of cycle
+		// TODO: I'd prefer to use the for () cycle to exclude the instantiations of
+		// cycle
 		// variables (out of cycle)
 
 		// int len = 0;
 		// while (len < 100) {
-		
-		// TODO: It would be better to move the "int random_int" declaration put of cycle.
-		
+
+		// TODO: It would be better to move the "int random_int" declaration put of
+		// cycle.
+
 		int random_int = 0;
-		
+
 		for (int i = 0; i < iterationsCount; i++) {
 
 			random_int = (int) Math.floor(Math.random() * (maxBound - minBound + 1) + minBound);
@@ -89,19 +109,23 @@ public class CollectionsCasting {
 			// len++;
 		}
 		System.out.println("Size: " + generatedList.size());
-		
+
 		return generatedList;
 	}
 
 	public void calculate() {
 
-		List<Integer> generatedList = generateRandomList(1, 10, 100);
+		List<Integer> generatedList = generateRandomList(1, 4, 100);
 
 		// Call the formatListToMap(...) method
 		Map<Integer, Integer> formatedMap = formatListToMap(generatedList);
-		
+
 		inverseMap(formatedMap);
-		
-		//formatListToMapVersion2(generatedList);
+
+		// check that formatedMap was reversed
+		System.out.println(formatedMap);
+
+		// formatListToMapVersion2(generatedList);
+
 	}
 }
