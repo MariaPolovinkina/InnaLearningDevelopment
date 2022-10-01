@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -70,16 +71,53 @@ public class CollectionsCasting {
 		for (Map.Entry<Integer, Integer> entry : sourceMap.entrySet()) {
 
 			myMap.put(new MyIntWrapper(entry.getValue()), entry.getKey());
-			
+
 		}
-		//print to check
+		// print to check
 		System.out.print("{ ");
 		for (Map.Entry<MyIntWrapper, Integer> entry : myMap.entrySet()) {
-			System.out.print(entry.getKey().get() +":"+ entry.getValue()+ " ");
+			System.out.print(entry.getKey().get() + ":" + entry.getValue() + " ");
 		}
 		System.out.println("}");
-		
+
 		return myMap;
+
+	}
+
+	public List<Integer[]> inverseMap2(Map<Integer, Integer> sourceMap) {
+
+		// TODO: define the return value type and add it instead of void!
+
+		List<Integer[]> inverseList = new ArrayList<>();
+
+		for (Map.Entry<Integer, Integer> entry : sourceMap.entrySet()) {
+
+			inverseList.add(new Integer[] { entry.getValue(), entry.getKey() });
+
+		}
+		// print to check with iterator
+
+		Iterator<Integer[]> iter = inverseList.iterator();
+
+		Integer[] myInt;
+
+		while (iter.hasNext()) {
+
+			myInt = iter.next();
+
+			System.out.print(myInt[0] + ":" + myInt[1] + " ");
+		}
+
+		System.out.println();
+
+		// print to check with for
+
+		for (int i = 0; i < inverseList.size(); i++) {
+
+			System.out.print(inverseList.get(i)[0] + ":" + inverseList.get(i)[1] + " ");
+		}
+
+		return inverseList;
 
 	}
 
@@ -118,8 +156,8 @@ public class CollectionsCasting {
 
 		// Call the formatListToMap(...) method
 		Map<Integer, Integer> formatedMap = formatListToMap(generatedList);
-		
-		inverseMap(formatedMap);		
+
+		inverseMap2(formatedMap);
 
 		// formatListToMapVersion2(generatedList);
 
