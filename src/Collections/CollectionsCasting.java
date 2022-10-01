@@ -29,7 +29,7 @@ public class CollectionsCasting {
 		// print for checking #1
 		System.out.println(Arrays.asList(myMap));
 		// print for checking #2
-		System.out.println(Collections.singletonList(myMap));
+		// System.out.println(Collections.singletonList(myMap));
 
 		// Add your own return
 		return myMap;
@@ -39,8 +39,7 @@ public class CollectionsCasting {
 	 * Just for demonstration!
 	 * 
 	 * @param sourceList
-	 * @return
-	 * cool!!!!!!
+	 * @return cool!!!!!!
 	 */
 	public Map<Integer, Integer> formatListToMapVersion2(List<Integer> sourceList) {
 
@@ -62,25 +61,25 @@ public class CollectionsCasting {
 
 	}
 
-	public void inverseMap(Map<Integer, Integer> sourceMap) {
+	public Map<MyIntWrapper, Integer> inverseMap(Map<Integer, Integer> sourceMap) {
 
 		// TODO: define the return value type and add it instead of void!
-		
-		Map<Integer, Integer> myMap = new HashMap<>();
+
+		Map<MyIntWrapper, Integer> myMap = new HashMap<>();
 
 		for (Map.Entry<Integer, Integer> entry : sourceMap.entrySet()) {
-			
-			myMap.put(entry.getValue(), entry.getKey());
+
+			myMap.put(new MyIntWrapper(entry.getValue()), entry.getKey());
 			
 		}
-		/* there are two options
-		* 1) i can return myMap or
-		* 2) can re-write myMap and do not return anything
-		* what will be the better way? 
-		*/
-		sourceMap.clear();
+		//print to check
+		System.out.print("{ ");
+		for (Map.Entry<MyIntWrapper, Integer> entry : myMap.entrySet()) {
+			System.out.print(entry.getKey().get() +":"+ entry.getValue()+ " ");
+		}
+		System.out.println("}");
 		
-		sourceMap.putAll(myMap);
+		return myMap;
 
 	}
 
@@ -115,15 +114,12 @@ public class CollectionsCasting {
 
 	public void calculate() {
 
-		List<Integer> generatedList = generateRandomList(1, 4, 100);
+		List<Integer> generatedList = generateRandomList(1, 10, 100);
 
 		// Call the formatListToMap(...) method
 		Map<Integer, Integer> formatedMap = formatListToMap(generatedList);
-
-		inverseMap(formatedMap);
-
-		// check that formatedMap was reversed
-		System.out.println(formatedMap);
+		
+		inverseMap(formatedMap);		
 
 		// formatListToMapVersion2(generatedList);
 
