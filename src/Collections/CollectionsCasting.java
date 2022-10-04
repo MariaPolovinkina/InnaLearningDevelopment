@@ -2,11 +2,14 @@ package Collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public class CollectionsCasting {
@@ -149,6 +152,38 @@ public class CollectionsCasting {
 
 		return generatedList;
 	}
+	
+	public static Map<Integer, Collection<Integer>> inverseMapMariaImpl (Map<Integer, Integer> sourceMap)
+	{
+		Map<Integer, Collection<Integer>> resultMap = new HashMap<>();
+		
+		Set<Integer> keys = sourceMap.keySet();
+		
+		Integer curValue;
+		
+		for(Integer key : keys)
+		{
+			curValue = sourceMap.get(key);
+			
+			resultMap.compute(curValue, (val, keySet) -> {
+				
+				if(keySet == null) {
+					
+					keySet = new HashSet<>();
+                }
+				
+				keySet.add(key);
+				
+                return keySet;
+			});
+			
+		}
+		
+		System.out.println("\nInverseMapMariaImpl method results =====>");
+		System.out.println(Arrays.asList(resultMap));
+
+		return resultMap;
+	}
 
 	public void calculate() {
 
@@ -157,7 +192,9 @@ public class CollectionsCasting {
 		// Call the formatListToMap(...) method
 		Map<Integer, Integer> formatedMap = formatListToMap(generatedList);
 
-		inverseMap2(formatedMap);
+		//inverseMap2(formatedMap);
+		
+		Map<Integer, Collection<Integer>> inversedMap = inverseMapMariaImpl(formatedMap);
 
 		// formatListToMapVersion2(generatedList);
 
