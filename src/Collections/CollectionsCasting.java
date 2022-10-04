@@ -152,37 +152,62 @@ public class CollectionsCasting {
 
 		return generatedList;
 	}
-	
-	public static Map<Integer, Collection<Integer>> inverseMapMariaImpl (Map<Integer, Integer> sourceMap)
-	{
+
+	public static Map<Integer, Collection<Integer>> inverseMapMariaImpl(Map<Integer, Integer> sourceMap) {
 		Map<Integer, Collection<Integer>> resultMap = new HashMap<>();
-		
+
 		Set<Integer> keys = sourceMap.keySet();
-		
+
 		Integer curValue;
-		
-		for(Integer key : keys)
-		{
+
+		for (Integer key : keys) {
+			// System.out.println("key: "+key);
 			curValue = sourceMap.get(key);
-			
+			// System.out.println("curvalue: "+curValue);
 			resultMap.compute(curValue, (val, keySet) -> {
-				
-				if(keySet == null) {
-					
+
+				if (keySet == null) {
+
 					keySet = new HashSet<>();
-                }
-				
+				}
+
 				keySet.add(key);
-				
-                return keySet;
+
+				return keySet;
 			});
-			
+
 		}
-		
+
 		System.out.println("\nInverseMapMariaImpl method results =====>");
 		System.out.println(Arrays.asList(resultMap));
 
 		return resultMap;
+	}
+
+	public Map<Integer, Integer> exampleCompute(Map<Integer, Integer> sourseMap) {
+
+		Map<Integer, Integer> resMap = new HashMap<>();
+
+		for (Integer key : sourseMap.keySet()) {
+
+			resMap.compute(key, (mykey, val) -> {
+				
+				val = sourseMap.get(key);
+				
+				if (val % 2 == 0) {
+
+					val++;
+				}
+
+				return val;
+
+			});
+		}
+
+		System.out.println("\nExample to compute method results =====>");
+		System.out.println(Arrays.asList(resMap));
+
+		return resMap;
 	}
 
 	public void calculate() {
@@ -192,8 +217,10 @@ public class CollectionsCasting {
 		// Call the formatListToMap(...) method
 		Map<Integer, Integer> formatedMap = formatListToMap(generatedList);
 
-		//inverseMap2(formatedMap);
-		
+		// inverseMap2(formatedMap);
+
+		Map<Integer, Integer> computedMap = exampleCompute(formatedMap);
+
 		Map<Integer, Collection<Integer>> inversedMap = inverseMapMariaImpl(formatedMap);
 
 		// formatListToMapVersion2(generatedList);
