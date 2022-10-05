@@ -209,6 +209,42 @@ public class CollectionsCasting {
 
 		return resMap;
 	}
+	
+	public static Map<Integer, Collection<Integer>> inverseMapWithoutCompute(Map<Integer, Integer> sourceMap) {
+		
+		Map<Integer, Collection<Integer>> resultMap = new HashMap<>();
+
+		Set<Integer> keys = sourceMap.keySet();
+
+		Integer curValue;
+		
+		Collection<Integer> newValues = null;
+
+		for (Integer key : keys) {
+			
+			curValue = sourceMap.get(key);
+			
+			if (!resultMap.containsKey(curValue)) {
+				
+			newValues = new HashSet<>();
+			
+			newValues.add(key);
+			
+			resultMap.put(curValue, newValues);
+			
+			} else {
+				
+				resultMap.get(curValue).add(key);
+			}
+			
+
+		}
+
+		System.out.println("\nInverse_Without_Compute method results =====>");
+		System.out.println(Arrays.asList(resultMap));
+
+		return resultMap;
+	}
 
 	public void calculate() {
 
@@ -222,6 +258,8 @@ public class CollectionsCasting {
 		Map<Integer, Integer> computedMap = exampleCompute(formatedMap);
 
 		Map<Integer, Collection<Integer>> inversedMap = inverseMapMariaImpl(formatedMap);
+		
+		Map<Integer, Collection<Integer>> inversedMapWithoutComp = inverseMapWithoutCompute(formatedMap);
 
 		// formatListToMapVersion2(generatedList);
 
