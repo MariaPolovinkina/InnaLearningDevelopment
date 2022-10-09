@@ -46,9 +46,9 @@ public class TasksForInterview {
 		System.out.println(revStr);
 
 		return revStr.toString();
-		
-		//It could be done with in one line
-		//return new StringBuilder(str).reverse().toString();
+
+		// It could be done with in one line
+		// return new StringBuilder(str).reverse().toString();
 	}
 
 	// reverse string with char array
@@ -57,7 +57,7 @@ public class TasksForInterview {
 		String revStr = "";
 
 		char[] arr = str.toCharArray();
-		
+
 		for (int i = (arr.length - 1); i >= 0; i--) {
 			revStr += arr[i];
 		}
@@ -66,49 +66,49 @@ public class TasksForInterview {
 
 		return revStr;
 	}
-	
+
 	// reverse string with char array variant 2
 	public String reverseStringWithCharArr2(final String str) {
-		
+
 		int index = str.length() - 1;
-		
+
 		char[] arr = new char[str.length()];
-				
+
 		for (int i = 0; i < arr.length; i++) {
-			
+
 			arr[i] = str.charAt(index);
 			index--;
-		}	
-		
+		}
+
 		String revStr = String.valueOf(arr);
-		
-		System.out.println(revStr);		
-		
+
+		System.out.println(revStr);
+
 		return revStr;
 	}
-	
+
 	// reverse string with char array variant 3
 	public String reverseStringWithCharArr3(final String str) {
-		
+
 		String resString = "";
-		  
+
 		for (int i = 0; i < str.length(); i++) {
 			resString = str.charAt(i) + resString;
 		}
-		  
-		System.out.println(resString);	
+
+		System.out.println(resString);
 		return resString;
 	}
 
-	//Recursive implementation
+	// Recursive implementation
 	public String reverseStringRecursive(final String str) {
-		
+
 		String rightPartStr;
 		String leftPartStr;
 		int length = str.length();
 
 		if (length <= 1) {
-		   return str;
+			return str;
 		}
 
 		leftPartStr = str.substring(0, length / 2);
@@ -116,53 +116,112 @@ public class TasksForInterview {
 
 		return reverseStringRecursive(rightPartStr) + reverseStringRecursive(leftPartStr);
 	}
-	
-	//Advanced solution
+
+	// Advanced solution
 	public String reverseStringWithCharsXOR(final String str) {
-		
+
 		char[] stringArray = str.toCharArray();
-		  
+
 		int leftIndex = 0;
 		int rightIndex = stringArray.length - 1;
 		String resString = "";
-		  
+
 		while (leftIndex < rightIndex) {
-			  
+
 			stringArray[leftIndex] = (char) (stringArray[leftIndex] ^ stringArray[rightIndex]);
 			stringArray[rightIndex] = (char) (stringArray[leftIndex] ^ stringArray[rightIndex]);
 			stringArray[leftIndex] = (char) (stringArray[leftIndex] ^ stringArray[rightIndex]);
-			 
+
 			leftIndex++;
 			rightIndex--;
 		}
-		  
+
 		for (int i = 0; i < stringArray.length; i++) {
 			resString = resString + stringArray[i];
 		}
-		  
+
 		System.out.println(resString);
 		return resString;
 	}
+
+	public void swapInt(int a, int b) {
+
+		a = a + b;
+		b = a - b;
+		a = a - b;
+
+		System.out.println("a: " + a);
+		System.out.println("b: " + b);
+
+	}
 	
+	public void swapIntXOR(int a, int b) {
+		
+		a = a^b;
+		b = a^b;
+		a = a^b;
+		
+		System.out.println("a: "+a);
+		System.out.println("b: "+b);
+		
+	}
+	
+	public Boolean isPrime(int num) {
+		
+		if (num <=1) {
+			
+			return false;
+		}	
+		
+		if(num <=3) {
+			
+			return true;
+		}
+		
+		if (num%2 == 0 || num %3 == 0) {
+			
+			return false;
+		}
+		
+		for (int i = 2; i <= num/2; i++) {
+			
+			if (num%i == 0) {
+				
+				return false;
+				
+			}
+		}		
+		
+		return true;
+	}
+
 	public void compute() {
 
 		// List<String> sortedList = sortWithoutFirstChar();
-		
+
 		String str = "Java is the best programming language!";
-		
+
 		String strResult = reverseStringWithStringBuilder(str);
-		
+
 		String strArr = reverseStringWithCharArr(str);
-		
-		String strArr2 = reverseStringWithCharArr2(strArr);
-		
-		String strArr3 = reverseStringWithCharArr3(strArr);
-		
+
+		// String strArr2 = reverseStringWithCharArr2(strArr);
+
+		// String strArr3 = reverseStringWithCharArr3(strArr);
+
 		String strArr4 = reverseStringRecursive(strArr);
-		System.out.println(strArr4);
-		
+		System.out.println("Arr4 " + strArr4);
+
 		String strArr5 = reverseStringWithCharsXOR(str);
-			
+
+		int a = 9;
+		int b = 77;
+		
+		swapInt(a, b);
+		swapIntXOR(a,b);
+		
+		System.out.println(isPrime(29));
+
 	}
 
 }
