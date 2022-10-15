@@ -154,74 +154,128 @@ public class TasksForInterview {
 		System.out.println("b: " + b);
 
 	}
-	
+
 	public void swapIntXOR(int a, int b) {
-		
-		a = a^b;
-		b = a^b;
-		a = a^b;
-		
-		System.out.println("a: "+a);
-		System.out.println("b: "+b);
-		
+
+		a = a ^ b;
+		b = a ^ b;
+		a = a ^ b;
+
+		System.out.println("a: " + a);
+		System.out.println("b: " + b);
+
 	}
-	
+
 	public Boolean isPrime(int num) {
-		
-		if (num <=1) {
-			
+
+		if (num <= 1) {
+
 			return false;
-		}	
-		
-		if(num <=3) {
-			
+		}
+
+		if (num <= 3) {
+
 			return true;
 		}
-		
-		if (num%2 == 0 || num %3 == 0) {
-			
+
+		if (num % 2 == 0 || num % 3 == 0) {
+
 			return false;
 		}
-		
-		for (int i = 2; i <= num/2; i++) {
-			
-			if (num%i == 0) {
-				
+
+		for (int i = 2; i <= num / 2; i++) {
+
+			if (num % i == 0) {
+
 				return false;
-				
+
 			}
-		}		
-		
+		}
+
 		return true;
+	}
+
+	// "abacaa" k = 2
+	public String getMaxSubstring(int k, String sourceStr) {
+
+		List<String> arrStr = new ArrayList<>();
+		String str = "";
+		int unique = 0;
+		int len = 0;
+		String result = null;
+
+		while (len < sourceStr.length()) {
+
+			for (int i = len; i < sourceStr.length(); i++) {
+
+				if (!str.contains(String.valueOf(sourceStr.charAt(i))) && unique < k) {
+
+					unique++;
+
+					str += sourceStr.charAt(i);
+
+				} else if (str.contains(String.valueOf(sourceStr.charAt(i)))) {
+
+					str += sourceStr.charAt(i);
+
+				} else {
+
+					break;
+				}
+
+			}
+
+			arrStr.add(str);
+			unique = 0;
+			str = "";
+			len++;
+
+		}
+
+		result = arrStr.get(0);
+
+		for (int i = 1; i < arrStr.size(); i++) {
+
+			if (result.length() < arrStr.get(i).length()) {
+
+				result = arrStr.get(i);
+
+			}
+		}
+
+		System.out.print(result);
+
+		return result;
 	}
 
 	public void compute() {
 
 		// List<String> sortedList = sortWithoutFirstChar();
 
-		String str = "Java is the best programming language!";
+		// String str = "Java is the best programming language!";
 
-		String strResult = reverseStringWithStringBuilder(str);
+		// String strResult = reverseStringWithStringBuilder(str);
 
-		String strArr = reverseStringWithCharArr(str);
+		// String strArr = reverseStringWithCharArr(str);
 
 		// String strArr2 = reverseStringWithCharArr2(strArr);
 
 		// String strArr3 = reverseStringWithCharArr3(strArr);
 
-		String strArr4 = reverseStringRecursive(strArr);
-		System.out.println("Arr4 " + strArr4);
+		// String strArr4 = reverseStringRecursive(strArr);
+		// System.out.println("Arr4 " + strArr4);
 
-		String strArr5 = reverseStringWithCharsXOR(str);
+		// String strArr5 = reverseStringWithCharsXOR(str);
 
-		int a = 9;
-		int b = 77;
-		
-		swapInt(a, b);
-		swapIntXOR(a,b);
-		
-		System.out.println(isPrime(29));
+		// int a = 9;
+		// int b = 77;
 
+		// swapInt(a, b);
+		// swapIntXOR(a,b);
+
+		// System.out.println(isPrime(29));
+
+		getMaxSubstring(2, "abakcaka");
 	}
 
 }
