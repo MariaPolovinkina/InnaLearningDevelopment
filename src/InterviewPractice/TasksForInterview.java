@@ -202,7 +202,7 @@ public class TasksForInterview {
 		String str = "";
 		int unique = 0;
 		int len = 0;
-		String result = null;
+		int maxLen = 0;
 
 		while (len < sourceStr.length()) {
 
@@ -225,28 +225,80 @@ public class TasksForInterview {
 
 			}
 
+			// find the max length of string
+			if (str.length() > maxLen) {
+
+				maxLen = str.length();
+
+			}
+
 			arrStr.add(str);
+
 			unique = 0;
 			str = "";
 			len++;
 
 		}
 
-		result = arrStr.get(0);
+		/*
+		 * result = arrStr.get(0);
+		 * 
+		 * for (int i = 1; i < arrStr.size(); i++) {
+		 * 
+		 * System.out.println(arrStr.get(i));
+		 * 
+		 * if (result.length() < arrStr.get(i).length()) {
+		 * 
+		 * result = arrStr.get(i);
+		 * 
+		 * } else if(result.length() == arrStr.get(i).length()) {
+		 * 
+		 * } }
+		 */
 
-		for (int i = 1; i < arrStr.size(); i++) {
+		// find all strings with maxLen;
+		str = "";
+		for (int i = 0; i < arrStr.size(); i++) {
 
-			if (result.length() < arrStr.get(i).length()) {
+			if (arrStr.get(i).length() == maxLen) {
 
-				result = arrStr.get(i);
+				str += arrStr.get(i) + " ";
 
 			}
 		}
 
-		System.out.print(result);
+		System.out.print("result: " + str);
 
-		return result;
+		return str.trim();
 	}
+	
+	public int findMissingTwo(int[] numbers) {
+
+        int diff = (numbers[numbers.length-1] - numbers[0]) / (numbers.length);
+
+        int miss = numbers[0];
+
+        for (int i = 1; i < numbers.length; i++) {
+
+            /*miss = numbers[i - 1] + diff;
+
+            if (numbers[i] != miss) {
+               
+                break;
+            }*/
+        	
+        	if (numbers[i] != (numbers[i-1]+diff)) {
+        		
+        		miss = numbers[i - 1] + diff;
+        		
+                break;
+            } 
+        }
+
+        System.out.println("miss: "+miss);
+
+        return miss;
+    }
 
 	public void compute() {
 
@@ -275,7 +327,13 @@ public class TasksForInterview {
 
 		// System.out.println(isPrime(29));
 
-		getMaxSubstring(2, "abakcaka");
+		getMaxSubstring(2, "abakcakam");
+		
+		System.out.println();
+		
+		findMissingTwo(new int[]{1,3,4,5});
+		
+		findMissingTwo(new int[]{-2,-4,-8,-10});
 	}
 
 }
