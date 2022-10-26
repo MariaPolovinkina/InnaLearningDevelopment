@@ -305,12 +305,12 @@ public class TasksForInterview {
 		return miss;
 	}
 
-	public String getMaxSubstringOpimizationWithMap(int k, String sourceStr) {
+	// "abakcakam"
+	public List<String> getMaxSubstringOpimizationWithMap(int k, String sourceStr) {
 
 		List<String> arrStr = new ArrayList<>();
 		Map<String, String> checkMap = new HashMap<>();
 		String str = "";
-		int unique = 0;
 		int len = 0;
 		int maxLen = 0;
 
@@ -319,62 +319,55 @@ public class TasksForInterview {
 			for (int i = len; i < sourceStr.length(); i++) {
 
 				if (!checkMap.containsKey(String.valueOf(sourceStr.charAt(i))) && checkMap.size() < k) {
+
 					str += sourceStr.charAt(i);
+
 					checkMap.put(String.valueOf(sourceStr.charAt(i)), str);
+
 				} else if (checkMap.containsKey(String.valueOf(sourceStr.charAt(i)))) {
+
 					str += sourceStr.charAt(i);
+
 					checkMap.put(String.valueOf(sourceStr.charAt(i)), str);
+
 				} else {
+
 					break;
 				}
 
-				/*
-				 * if (!str.contains(String.valueOf(sourceStr.charAt(i))) && unique < k) {
-				 * 
-				 * unique++;
-				 * 
-				 * str += sourceStr.charAt(i);
-				 * 
-				 * } else if (str.contains(String.valueOf(sourceStr.charAt(i)))) {
-				 * 
-				 * str += sourceStr.charAt(i);
-				 * 
-				 * } else {
-				 * 
-				 * break; }
-				 */
-				checkMap = null;
 			}
 
-			// find the max length of string
-			if (str.length() > maxLen) {
+			for (String key : checkMap.keySet()) {
+				
+				if (arrStr.isEmpty()) {
+					
+					arrStr.add(checkMap.get(key));
+					
+					maxLen = checkMap.get(key).length();
+					
+				} else if (checkMap.get(key).length() > maxLen) {
+					
+					arrStr.clear();
+					
+					arrStr.add(checkMap.get(key));
+					
+					maxLen = checkMap.get(key).length();
 
-				maxLen = str.length();
-
+				} else if (checkMap.get(key).length() == maxLen) {
+					
+					arrStr.add(checkMap.get(key));
+				}
 			}
-
-			arrStr.add(str);
-
-			// unique = 0;
+			
+			checkMap.clear();
 			str = "";
 			len++;
 
 		}
 
-		// find all strings with maxLen;
-		str = "";
-		for (int i = 0; i < arrStr.size(); i++) {
-
-			if (arrStr.get(i).length() == maxLen) {
-
-				str += arrStr.get(i) + " ";
-
-			}
-		}
-
-		System.out.print("result: " + str);
-
-		return str.trim();
+		System.out.println("result: " + arrStr);
+		
+		return arrStr;
 	}
 
 	public String getMaxSubstringOpimizationWithSet(int k, String sourceStr) {
@@ -390,33 +383,31 @@ public class TasksForInterview {
 			for (int i = len; i < sourceStr.length(); i++) {
 
 				if (!checkSet.contains(String.valueOf(sourceStr.charAt(i))) && checkSet.size() < k) {
-					
+
 					checkSet.add(String.valueOf(sourceStr.charAt(i)));
-					
-					
+
 					str += sourceStr.charAt(i);
-					
+
 				} else if (checkSet.contains(String.valueOf(sourceStr.charAt(i)))) {
-					
+
 					str += sourceStr.charAt(i);
-					
 
 				} else {
+
 					break;
 				}
 
-				
 			}
-			
+
 			// find the max length of string
 			if (str.length() > maxLen) {
 
 				maxLen = str.length();
 
 			}
-			
+
 			checkSet.clear();
-			arrStr.add(str);			
+			arrStr.add(str);
 			str = "";
 			len++;
 
@@ -474,6 +465,10 @@ public class TasksForInterview {
 		// findMissingTwo(new int[]{-2,-4,-8,-10});
 
 		getMaxSubstringOpimizationWithSet(2, "abakcakam");
+
+		System.out.println();
+
+		getMaxSubstringOpimizationWithMap(2, "abakcakam");
 	}
 
 }
