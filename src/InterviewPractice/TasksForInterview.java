@@ -2,8 +2,12 @@ package InterviewPractice;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class TasksForInterview {
 
@@ -271,34 +275,168 @@ public class TasksForInterview {
 
 		return str.trim();
 	}
-	
+
 	public int findMissingTwo(int[] numbers) {
 
-        int diff = (numbers[numbers.length-1] - numbers[0]) / (numbers.length);
+		int diff = (numbers[numbers.length - 1] - numbers[0]) / (numbers.length);
 
-        int miss = numbers[0];
+		int miss = numbers[0];
 
-        for (int i = 1; i < numbers.length; i++) {
+		for (int i = 1; i < numbers.length; i++) {
 
-            /*miss = numbers[i - 1] + diff;
+			/*
+			 * miss = numbers[i - 1] + diff;
+			 * 
+			 * if (numbers[i] != miss) {
+			 * 
+			 * break; }
+			 */
 
-            if (numbers[i] != miss) {
-               
-                break;
-            }*/
-        	
-        	if (numbers[i] != (numbers[i-1]+diff)) {
-        		
-        		miss = numbers[i - 1] + diff;
-        		
-                break;
-            } 
-        }
+			if (numbers[i] != (numbers[i - 1] + diff)) {
 
-        System.out.println("miss: "+miss);
+				miss = numbers[i - 1] + diff;
 
-        return miss;
-    }
+				break;
+			}
+		}
+
+		System.out.println("miss: " + miss);
+
+		return miss;
+	}
+
+	public String getMaxSubstringOpimizationWithMap(int k, String sourceStr) {
+
+		List<String> arrStr = new ArrayList<>();
+		Map<String, String> checkMap = new HashMap<>();
+		String str = "";
+		int unique = 0;
+		int len = 0;
+		int maxLen = 0;
+
+		while (len < sourceStr.length()) {
+
+			for (int i = len; i < sourceStr.length(); i++) {
+
+				if (!checkMap.containsKey(String.valueOf(sourceStr.charAt(i))) && checkMap.size() < k) {
+					str += sourceStr.charAt(i);
+					checkMap.put(String.valueOf(sourceStr.charAt(i)), str);
+				} else if (checkMap.containsKey(String.valueOf(sourceStr.charAt(i)))) {
+					str += sourceStr.charAt(i);
+					checkMap.put(String.valueOf(sourceStr.charAt(i)), str);
+				} else {
+					break;
+				}
+
+				/*
+				 * if (!str.contains(String.valueOf(sourceStr.charAt(i))) && unique < k) {
+				 * 
+				 * unique++;
+				 * 
+				 * str += sourceStr.charAt(i);
+				 * 
+				 * } else if (str.contains(String.valueOf(sourceStr.charAt(i)))) {
+				 * 
+				 * str += sourceStr.charAt(i);
+				 * 
+				 * } else {
+				 * 
+				 * break; }
+				 */
+				checkMap = null;
+			}
+
+			// find the max length of string
+			if (str.length() > maxLen) {
+
+				maxLen = str.length();
+
+			}
+
+			arrStr.add(str);
+
+			// unique = 0;
+			str = "";
+			len++;
+
+		}
+
+		// find all strings with maxLen;
+		str = "";
+		for (int i = 0; i < arrStr.size(); i++) {
+
+			if (arrStr.get(i).length() == maxLen) {
+
+				str += arrStr.get(i) + " ";
+
+			}
+		}
+
+		System.out.print("result: " + str);
+
+		return str.trim();
+	}
+
+	public String getMaxSubstringOpimizationWithSet(int k, String sourceStr) {
+
+		List<String> arrStr = new ArrayList<>();
+		Set<String> checkSet = new HashSet<>();
+		String str = "";
+		int len = 0;
+		int maxLen = 0;
+
+		while (len < sourceStr.length()) {
+
+			for (int i = len; i < sourceStr.length(); i++) {
+
+				if (!checkSet.contains(String.valueOf(sourceStr.charAt(i))) && checkSet.size() < k) {
+					
+					checkSet.add(String.valueOf(sourceStr.charAt(i)));
+					
+					
+					str += sourceStr.charAt(i);
+					
+				} else if (checkSet.contains(String.valueOf(sourceStr.charAt(i)))) {
+					
+					str += sourceStr.charAt(i);
+					
+
+				} else {
+					break;
+				}
+
+				
+			}
+			
+			// find the max length of string
+			if (str.length() > maxLen) {
+
+				maxLen = str.length();
+
+			}
+			
+			checkSet.clear();
+			arrStr.add(str);			
+			str = "";
+			len++;
+
+		}
+
+		// find all strings with maxLen;
+		str = "";
+		for (int i = 0; i < arrStr.size(); i++) {
+
+			if (arrStr.get(i).length() == maxLen) {
+
+				str += arrStr.get(i) + " ";
+
+			}
+		}
+
+		System.out.print("result: " + str);
+
+		return str.trim();
+	}
 
 	public void compute() {
 
@@ -328,12 +466,14 @@ public class TasksForInterview {
 		// System.out.println(isPrime(29));
 
 		getMaxSubstring(2, "abakcakam");
-		
+
 		System.out.println();
-		
-		findMissingTwo(new int[]{1,3,4,5});
-		
-		findMissingTwo(new int[]{-2,-4,-8,-10});
+
+		// findMissingTwo(new int[]{1,3,4,5});
+
+		// findMissingTwo(new int[]{-2,-4,-8,-10});
+
+		getMaxSubstringOpimizationWithSet(2, "abakcakam");
 	}
 
 }
