@@ -318,13 +318,8 @@ public class TasksForInterview {
 
 			for (int i = len; i < sourceStr.length(); i++) {
 
-				if (!checkMap.containsKey(String.valueOf(sourceStr.charAt(i))) && checkMap.size() < k) {
-
-					str += sourceStr.charAt(i);
-
-					checkMap.put(String.valueOf(sourceStr.charAt(i)), str);
-
-				} else if (checkMap.containsKey(String.valueOf(sourceStr.charAt(i)))) {
+				if ((!checkMap.containsKey(String.valueOf(sourceStr.charAt(i))) && checkMap.size() < k)
+						|| (checkMap.containsKey(String.valueOf(sourceStr.charAt(i))))) {
 
 					str += sourceStr.charAt(i);
 
@@ -338,27 +333,27 @@ public class TasksForInterview {
 			}
 
 			for (String key : checkMap.keySet()) {
-				
+
 				if (arrStr.isEmpty()) {
-					
+
 					arrStr.add(checkMap.get(key));
-					
+
 					maxLen = checkMap.get(key).length();
-					
+
 				} else if (checkMap.get(key).length() > maxLen) {
-					
+
 					arrStr.clear();
-					
+
 					arrStr.add(checkMap.get(key));
-					
+
 					maxLen = checkMap.get(key).length();
 
 				} else if (checkMap.get(key).length() == maxLen) {
-					
+
 					arrStr.add(checkMap.get(key));
 				}
 			}
-			
+
 			checkMap.clear();
 			str = "";
 			len++;
@@ -366,7 +361,7 @@ public class TasksForInterview {
 		}
 
 		System.out.println("result: " + arrStr);
-		
+
 		return arrStr;
 	}
 
