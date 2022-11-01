@@ -424,6 +424,112 @@ public class TasksForInterview {
 		return str.trim();
 	}
 
+	// "abakcakam"
+	public List<String> getMaxSubstringSlidingWindow(int k, String sourceStr) {
+
+		List<String> arrStr = new ArrayList<>();
+		Map<String, Integer> checkMap = new HashMap<>();
+		String str = "";
+		int len = 0;
+		int maxLen = 0;
+		String key = null;
+		String oldkey = null;
+
+		// find first window
+		for (int i = 0; i <= k;) {
+
+			key = String.valueOf(sourceStr.charAt(len));
+
+			if (!checkMap.containsKey(key) && i < k) {
+
+				checkMap.put(key, 1);
+
+				str += key;
+
+				i++;
+
+			} else if (checkMap.containsKey(key) && i == k) {
+
+				checkMap.put(key, checkMap.get(key) + 1);
+
+				str += key;
+
+			} else if (!checkMap.containsKey(key) && i == k) {
+
+				break;
+
+			}
+
+			len++;
+		}
+
+		maxLen = str.length();
+		arrStr.add(str);
+
+		// slide window
+		for (int j = str.length(); j < sourceStr.length();) {
+
+			oldkey = String.valueOf(str.charAt(0));
+
+			key = String.valueOf(sourceStr.charAt(j));
+
+			if (checkMap.containsKey(key)) {
+
+				checkMap.put(key, checkMap.get(key) + 1);
+
+				str += sourceStr.charAt(j);
+
+				j++;
+
+				// find max str
+				if (maxLen < str.length()) {
+
+					arrStr.clear();
+
+					arrStr.add(str);
+
+					maxLen = str.length();
+
+				} else if (maxLen == str.length()) {
+
+					arrStr.add(str);
+
+				}
+
+			} else if (!checkMap.containsKey(key)) {
+
+				if (checkMap.get(oldkey) == 1) {
+
+					checkMap.remove(oldkey);
+
+					checkMap.put(key, 1);
+
+					str = str.substring(1) + sourceStr.charAt(j);
+
+					j++;					
+					
+					 if (maxLen == str.length()) {
+
+						arrStr.add(str);
+					}
+
+				} else {
+
+					checkMap.put(oldkey, checkMap.get(oldkey) - 1);
+
+					str = str.substring(1);
+
+				}
+
+			}
+
+		}
+
+		System.out.println("result " + arrStr);
+
+		return arrStr;
+	}
+
 	public void compute() {
 
 		// List<String> sortedList = sortWithoutFirstChar();
@@ -451,19 +557,24 @@ public class TasksForInterview {
 
 		// System.out.println(isPrime(29));
 
-		getMaxSubstring(2, "abakcakam");
+		// getMaxSubstring(2, "abakcakam");
 
-		System.out.println();
+		// System.out.println();
 
 		// findMissingTwo(new int[]{1,3,4,5});
 
 		// findMissingTwo(new int[]{-2,-4,-8,-10});
 
-		getMaxSubstringOpimizationWithSet(2, "abakcakam");
+		// getMaxSubstringOpimizationWithSet(2, "abakcakam");
 
-		System.out.println();
+		// System.out.println();
 
 		getMaxSubstringOpimizationWithMap(2, "abakcakam");
+		System.out.println();
+		getMaxSubstringSlidingWindow(2, "abakcakaaamm");
+		getMaxSubstringSlidingWindow(2, "abakcakammmm");
+		getMaxSubstringSlidingWindow(2, "abakcakam");
+		getMaxSubstringSlidingWindow(2, "baaaakcakam");
 	}
 
 }
