@@ -1,6 +1,7 @@
 package InterviewPractice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -529,6 +530,92 @@ public class TasksForInterview {
 
 		return arrStr;
 	}
+	
+	// This function calculates number of unique characters
+	// using a associative array count[]. 
+	static boolean isValid (int count[], int k) {
+		
+		int val = 0;
+		
+		for (int i = 0; i < 26; i++)	{
+			
+			if (count[i] > 0){
+				val++;
+			}
+		}
+	
+		return (k >= val);
+	}
+	
+    static void findMaxSubstring(final int k, final String sourceStr)
+    {
+        int unuqueInd = 0;
+        int strLenght = sourceStr.length();
+        
+        Map<Integer, List<String>> resMaxStrings = new HashMap<>();
+        Integer resMaxMapIndex = 1;
+ 
+        int count[] = new int[26];
+        Arrays.fill(count, 0);
+        
+        int currentCharIndex = 0;
+        for (int i = 0; i < strLenght; i++)
+        {
+        	currentCharIndex = sourceStr.charAt(i) - 'a';
+            if (count[currentCharIndex] == 0)
+            {
+            	unuqueInd++;
+            }
+            count[currentCharIndex]++;
+        }
+ 
+        if (unuqueInd < k) {
+            System.out.print("Not enough unique characters");
+            return;
+        }
+ 
+        int curr_start = 0, curr_end = 0;
+ 
+        int max_window_size = 1;
+        int max_window_start = 0;
+ 
+        Arrays.fill(count, 0);
+         
+        count[sourceStr.charAt(0) - 'a']++;
+ 
+        for (int i = 1; i < strLenght; i++) {
+
+            count[sourceStr.charAt(i) - 'a']++;
+            curr_end++;
+ 
+            while (!isValid(count, k)) {
+                count[sourceStr.charAt(curr_start) - 'a']--;
+                curr_start++;
+            }
+ 
+            if (curr_end - curr_start + 1 >= max_window_size)
+            {
+                max_window_size = curr_end - curr_start + 1;
+                max_window_start = curr_start;
+                
+                String resMaxSubstring = sourceStr.substring(max_window_start,
+                        max_window_start + max_window_size);
+                
+                List<String> resMaxStringsLst = resMaxStrings.get(max_window_size);
+                
+                if (resMaxStringsLst == null) {
+                	resMaxStringsLst = new ArrayList<String>();
+                	resMaxMapIndex++;
+                } 
+                
+                resMaxStringsLst.add(resMaxSubstring);
+                resMaxStrings.putIfAbsent(max_window_size, resMaxStringsLst);
+                
+            }
+        }
+        
+        System.out.println("resultMKA " + resMaxStrings.get(resMaxMapIndex));
+    }
 
 	public void compute() {
 
@@ -575,6 +662,7 @@ public class TasksForInterview {
 		getMaxSubstringSlidingWindow(2, "abakcakammmm");
 		getMaxSubstringSlidingWindow(2, "abakcakam");
 		getMaxSubstringSlidingWindow(2, "baaaakcakam");
+		findMaxSubstring(2, "baaaakcakam");
 	}
 
 }
