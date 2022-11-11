@@ -616,6 +616,41 @@ public class TasksForInterview {
         
         System.out.println("resultMKA " + resMaxStrings.get(resMaxMapIndex));
     }
+    
+    public int totalFruit(int[] fruits, int k) {
+        
+        int maxTrees = 1;
+        int basketOne = fruits[k-1];
+        int basketTwo = 0;
+        
+        //find what fruits will be in the second basket
+        for (int i = k; i < fruits.length; i++){
+        	
+        	maxTrees++;
+            k++;
+            
+            if (basketOne != fruits[i]) {            	
+            	basketTwo = fruits[i];
+            	break;
+            } 
+            
+        }
+
+       //find others trees in line with fruits in baskets 
+        for (int j = k; j <fruits.length; j++){
+        	
+            if (basketOne != fruits[j] && basketTwo != fruits[j]) {
+            	break;
+            }
+            
+            maxTrees++;
+        }
+        
+        System.out.println("The number of trees: "+ maxTrees);
+        
+        return maxTrees;
+        
+    }
 
 	public void compute() {
 
@@ -656,13 +691,14 @@ public class TasksForInterview {
 
 		// System.out.println();
 
-		getMaxSubstringOpimizationWithMap(2, "abakcakam");
-		System.out.println();
-		getMaxSubstringSlidingWindow(2, "abakcakaaamm");
-		getMaxSubstringSlidingWindow(2, "abakcakammmm");
-		getMaxSubstringSlidingWindow(2, "abakcakam");
+		//getMaxSubstringOpimizationWithMap(2, "abakcakam");
+		//System.out.println();
+		//getMaxSubstringSlidingWindow(2, "abakcakaaamm");
+		//getMaxSubstringSlidingWindow(2, "abakcakammmm");
+		//getMaxSubstringSlidingWindow(2, "abakcakam");
 		getMaxSubstringSlidingWindow(2, "baaaakcakam");
 		findMaxSubstring(2, "baaaakcakam");
+		totalFruit(new int[] {1,2,3,2,2,3}, 2);
 	}
 
 }
